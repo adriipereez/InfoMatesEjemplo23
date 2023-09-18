@@ -37,6 +37,14 @@ public class NauJugador : MonoBehaviour
         novaPos.x = Mathf.Clamp(novaPos.x, limitEsquerraX, limitDretaX);
         novaPos.y = Mathf.Clamp(novaPos.y, limitAbajoY, limitArribaY);
 
+        if (Input.GetKeyDown(KeyCode.Space)){
+            shoot();
+        }
+
         transform.position = novaPos;
+    }
+    private void shoot(){
+        GameObject bala = Instantiate(Resources.Load("Prefabs/azul") as GameObject);
+        bala.transform.position = transform.position;
     }
 }
