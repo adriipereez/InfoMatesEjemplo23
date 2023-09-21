@@ -14,9 +14,12 @@ public class bala : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //La bala suba para arrriba
         Vector2 novaPos = transform.position;
         novaPos.y += velocity * Time.deltaTime;
         transform.position = novaPos;
+
+        //eliminar copia
         float limitArribaY = Camera.main.orthographicSize;
         if (transform.position.y >= limitArribaY){
             Destroy(this.gameObject);

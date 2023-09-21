@@ -9,19 +9,21 @@ public class NauJugador : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _velNau = 5f;
+        _velNau = 7f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float direccioHoritzontal = Input.GetAxisRaw("Horizontal");
-        float direccioVertical = Input.GetAxisRaw("Vertical");
-        //Debug.Log(direccioHoritzontal);
+        MovimentNau();
 
-        Vector2 dreccioIndicada = new Vector2(direccioHoritzontal, direccioVertical).normalized;
+        DispararBala();
+
+    }
+
+    private void MovimentNau() {
+        //Encontrar limites pantalla
         SpriteRenderer SpriteRenderer = GetComponent<SpriteRenderer>();
-
         float anchura = SpriteRenderer.bounds.size.x / 2;
         float altura = SpriteRenderer.bounds.size.y / 2;
 
@@ -31,20 +33,24 @@ public class NauJugador : MonoBehaviour
         float limitArribaY = Camera.main.orthographicSize - altura;
         float limitAbajoY = -Camera.main.orthographicSize + altura;
 
+        float direccioHoritzontal = Input.GetAxisRaw("Horizontal");
+        float direccioVertical = Input.GetAxisRaw("Vertical");
+
+        //Movimiento nau
+        Vector2 dreccioIndicada = new Vector2(direccioHoritzontal, direccioVertical).normalized;
         Vector2 novaPos = transform.position; //retorna posicio actual de la nau.
         novaPos += dreccioIndicada * _velNau * Time.deltaTime;
 
         novaPos.x = Mathf.Clamp(novaPos.x, limitEsquerraX, limitDretaX);
         novaPos.y = Mathf.Clamp(novaPos.y, limitAbajoY, limitArribaY);
 
-        if (Input.GetKeyDown(KeyCode.Space)){
-            shoot();
-        }
-
         transform.position = novaPos;
     }
-    private void shoot(){
-        GameObject bala = Instantiate(Resources.Load("Prefabs/azul") as GameObject);
-        bala.transform.position = transform.position;
+
+    private void DispararBala() {
+        if (Input.GetKeyDown(KeyCode.Space)){
+            GameObject bala = Instantiate(Resources.Load("Prefabs/azul") as GameObject);
+            bala.transform.position = transform.position;
+        }
     }
 }
