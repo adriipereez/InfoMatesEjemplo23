@@ -21,6 +21,16 @@ public class NauJugador : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter2D(Collider2D objecteTocat)
+    {
+        //cuando la nave toque un objeto, autoamticamente lamara al metodo
+        // El valor del ObjecteTocat, sera el objeto que hemos tocado (ej. un numero)
+        if (objecteTocat.tag == "Numero")
+        {
+            Destroy(gameObject);
+        }
+            }
+
     private void MovimentNau() {
         //Encontrar limites pantalla
         SpriteRenderer SpriteRenderer = GetComponent<SpriteRenderer>();

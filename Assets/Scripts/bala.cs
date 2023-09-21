@@ -25,4 +25,11 @@ public class bala : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    private void OnTriggerEnter2D(Collider2D objecteTocat)
+    {
+        if (objecteTocat.tag == "Numero")
+        {
+            Destroy(gameObject);
+        }
+    }
 }

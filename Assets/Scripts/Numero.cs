@@ -5,11 +5,19 @@ using UnityEngine;
 public class Numero : MonoBehaviour
 {
     private float _vel;
-
+    private int _valorNumero;
+    public Sprite[] _SpritesNumeros = new Sprite[10];
     // Start is called before the first frame update
     void Start()
     {
         _vel = 2f;
+
+        //Cargamos una imagen de numero aleatorio
+        System.Random aleatorio = new System.Random();
+        _valorNumero = aleatorio.Next(0 , 10);
+        //acceder al component Sprite Renderer i dentro de este el atributo Sprite
+        //Hacemos gameobject y get component para coger un atributo y dentro de las flechas pones el atributo . sprite
+        gameObject.GetComponent<SpriteRenderer>().sprite = _SpritesNumeros[_valorNumero];
     }
 
     // Update is called once per frame
@@ -19,6 +27,15 @@ public class Numero : MonoBehaviour
         novaPos.y = novaPos.y - _vel * Time.deltaTime;
         transform.position = novaPos;
         DestuyeSiSaleFuera();
+    }
+
+    private void OnTriggerEnter2D(Collider2D ObjecteTocat)
+    {
+        if (ObjecteTocat.tag == "bala" || ObjecteTocat.tag == "NauJugador")
+        {
+            Destroy(gameObject);   
+        }
+
     }
 
     private void DestuyeSiSaleFuera()
