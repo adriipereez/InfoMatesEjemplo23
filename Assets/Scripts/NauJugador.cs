@@ -31,7 +31,8 @@ public class NauJugador : MonoBehaviour
         {
             GameObject explos = Instantiate(_PrefabExpl);
             explos.transform.position = transform.position;
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            GameObject.Find("GameManager").GetComponent<GameManager>().SetEstatGameManager(GameManager.EstatGameManager.GameOver);
         }
             }
 
