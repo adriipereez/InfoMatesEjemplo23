@@ -5,11 +5,13 @@ using UnityEngine;
 public class NauJugador : MonoBehaviour
 {
     public float _velNau;
+    public GameObject _PrefabExpl;
 
     // Start is called before the first frame update
     void Start()
     {
         _velNau = 7f;
+
     }
 
     // Update is called once per frame
@@ -27,6 +29,8 @@ public class NauJugador : MonoBehaviour
         // El valor del ObjecteTocat, sera el objeto que hemos tocado (ej. un numero)
         if (objecteTocat.tag == "Numero")
         {
+            GameObject explos = Instantiate(_PrefabExpl);
+            explos.transform.position = transform.position;
             Destroy(gameObject);
         }
             }
